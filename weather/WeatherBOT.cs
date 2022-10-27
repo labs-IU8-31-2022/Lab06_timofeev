@@ -1,8 +1,5 @@
 ﻿using System.Data;
-using System.Net.Http.Json;
-using System.Text.Json;
 using Newtonsoft.Json;
-
 
 namespace WeatherBot;
 
@@ -26,8 +23,8 @@ struct Weather
         HttpClient client = new();
         client.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
         var response =
-            await client.GetAsync($"?lat={lat}&lon={lon}&appid={api}&units=metric");
-        Console.WriteLine(response.EnsureSuccessStatusCode());
+            await client.GetAsync($"?lat={lat}&lon={lon}&appid={API_KEY}&units=metric");
+        //Console.WriteLine(response.EnsureSuccessStatusCode());
         var (weather, code) = FromJsonDeserializer(await response.Content.ReadAsStringAsync());
         
         if (code == 200 && weather.Country is not null && weather.Name is not null)
