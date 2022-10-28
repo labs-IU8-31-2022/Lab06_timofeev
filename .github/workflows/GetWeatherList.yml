@@ -19,6 +19,8 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }} 
           
       - name: run
-        run: dotnet run
+        run: |
+          cd weather/bin/Debug/net6.0
+          dotnet run
             
 
