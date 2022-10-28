@@ -6,7 +6,7 @@ await using (var file = new StreamWriter("Result.txt", false))
     await file.WriteLineAsync("///Starting///");
 }
 
-while (weathers.Count < 5)
+while (weathers.Count < 50)
 {
     Random rand = new();
     var lat = (decimal)rand.Next(0, 18000000) / 100000 - 90;
@@ -14,7 +14,6 @@ while (weathers.Count < 5)
     try
     {
         var temp = await Weather.GetAsync(lat, lon);
-        //var temp = tempN.Result;
         weathers.Add(temp);
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         var tempString = $"{lat}<>{lon} \nCountry: {temp.Country} City: {temp.Name} " +
