@@ -14,7 +14,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         
       - name: Install dependencies
-        run: dotnet add package Newtonsoft.Json --version 13.0.1
+        run: |
+          cd weather
+          dotnet add package Newtonsoft.Json --version 13.0.1
       
       - name: build
         run: dotnet build
