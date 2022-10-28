@@ -26,8 +26,11 @@ struct Weather
         var response =
             await client.GetAsync($"?lat={lat}&lon={lon}&appid={API_KEY}&units=metric");
         //Console.WriteLine(response.EnsureSuccessStatusCode());
-        var (weather, code) = FromJsonDeserializer(await response.Content.ReadAsStringAsync());
-        
+        var (weather, code) = Convert.ToInt32(response.StatusCode) == 200
+            ? FromJsonDeserializer(await response.Content.ReadAsStringAsync())
+            : (new Weather(), Convert.ToInt32(response.StatusCode));
+
+
         if (code == 200 && weather.Country is not null && weather.Name is not null)
         {
             return weather;
