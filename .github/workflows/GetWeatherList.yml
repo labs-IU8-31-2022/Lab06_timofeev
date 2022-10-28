@@ -21,6 +21,6 @@ jobs:
       - name: run
         run: |
           cd weather/bin/Debug/net6.0
-          dotnet run
+          dotnet weather.dll
             
 
