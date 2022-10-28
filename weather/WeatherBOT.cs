@@ -5,7 +5,7 @@ namespace WeatherBot;
 
 struct Weather
 {
-    private static string? API_KEY = Environment.GetEnvironmentVariable("API_KEY");
+    private static string API_KEY = Environment.GetEnvironmentVariable("API_KEY");
     public string? Country { get; }
     public string? Name { get; }
     public decimal Temp { get; }
