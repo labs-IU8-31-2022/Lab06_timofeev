@@ -13,8 +13,8 @@ while (weathers.Count < 5)
     var lon = (decimal)rand.Next(0, 36000000) / 100000 - 180;
     try
     {
-        var tempN = await Weather.GetAsync(lat, lon);
-        var temp = tempN.Result;
+        var temp = await Weather.GetAsync(lat, lon);
+        //var temp = tempN.Result;
         weathers.Add(temp);
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         var tempString = $"{lat}<>{lon} \nCountry: {temp.Country} City: {temp.Name} " +
