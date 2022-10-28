@@ -35,10 +35,13 @@ while (weathers.Count < 5)
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(e.Message);
         Console.WriteLine(e.Data);
+        Console.WriteLine(e.HelpLink);
+        Console.WriteLine(e.Source);
+        Console.WriteLine(e.StackTrace);
     }
     finally
     {
-        Thread.Sleep(1000);
+        Thread.Sleep(5000);
         Console.ResetColor();
     }
 }
