@@ -30,4 +30,9 @@ jobs:
           cd weather/bin/Debug/net6.0
           dotnet weather.dll  
             
+      - name: artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Weather.txt
+          path: ./weather/bin/Debug/net6.0/Result.txt
 
