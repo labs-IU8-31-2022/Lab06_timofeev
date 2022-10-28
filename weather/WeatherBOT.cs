@@ -3,15 +3,15 @@ using Newtonsoft.Json;
 
 namespace WeatherBot;
 
-struct Weather
+internal struct Weather
 {
-    private static string? API_KEY = Environment.GetEnvironmentVariable("API_KEY");
+    private static readonly string? ApiKey = Environment.GetEnvironmentVariable("API_KEY");
     public string? Country { get; }
     public string? Name { get; }
     public decimal Temp { get; }
     public string Description { get; }
 
-    public Weather(string country, string name, decimal temp, string description) =>
+    private Weather(string country, string name, decimal temp, string description) =>
         (Country, Name, Temp, Description) = (country, name, temp, description);
 
     public static async Task<Weather> GetAsync(decimal lat, decimal lon)
@@ -24,13 +24,12 @@ struct Weather
         HttpClient client = new();
         client.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
         var response =
-            await client.GetAsync($"?lat={lat}&lon={lon}&appid={API_KEY}&units=metric");
+            await client.GetAsync($"?lat={lat}&lon={lon}&appid={ApiKey}&units=metric");
         //Console.WriteLine(response.EnsureSuccessStatusCode());
         var (weather, code) = Convert.ToInt32(response.StatusCode) == 200
             ? FromJsonDeserializer(await response.Content.ReadAsStringAsync())
             : (new Weather(), Convert.ToInt32(response.StatusCode));
-
-
+        
         if (code == 200 && weather.Country is not null && weather.Name is not null)
         {
             return weather;

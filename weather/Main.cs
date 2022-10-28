@@ -20,10 +20,8 @@ while (weathers.Count < 5)
         var tempString = $"{lat}<>{lon} \nCountry: {temp.Country} City: {temp.Name} " +
                          $"\nWeather: {temp.Description} \nTemperature: {temp.Temp}°C";
         Console.WriteLine(tempString);
-        await using (var file = new StreamWriter("Result.txt", true))
-        {
-            await file.WriteLineAsync($"{tempString}\n");
-        }
+        await using var file = new StreamWriter("Result.txt", true);
+        await file.WriteLineAsync($"{tempString}\n");
     }
     catch (HttpRequestException e)
     {
@@ -35,10 +33,6 @@ while (weathers.Count < 5)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(e.Message);
-        //Console.WriteLine(e.Data);
-        //Console.WriteLine(e.HelpLink);
-        //Console.WriteLine(e.Source);
-        //Console.WriteLine(e.StackTrace);
     }
     finally
     {
@@ -48,28 +42,28 @@ while (weathers.Count < 5)
 }
 
 var maxTemp = weathers.MaxBy(i => i.Temp);
-Console.WriteLine($"Country with max temperature: {maxTemp.Country} {maxTemp.Temp}");
+Console.WriteLine($"Country with max temperature: {maxTemp.Country}  {maxTemp.Temp}°C");
 
 var minTemp = weathers.MinBy(i => i.Temp);
-Console.WriteLine($"Country with min temperature: {minTemp.Country} {minTemp.Temp}");
+Console.WriteLine($"Country with min temperature: {minTemp.Country}  {minTemp.Temp}°C");
 
-Console.WriteLine($"Mean temperature: {weathers.Average(i => i.Temp)}");
+Console.WriteLine($"Mean temperature: {weathers.Average(i => i.Temp)}°C");
 
 Console.WriteLine($"Number of unique countries: {weathers.Select(i => i.Country).Distinct().ToList().Count}");
 
 var selectCountry = weathers.FirstOrDefault(i =>
     i.Description is "clear sky" or "rain" or "few clouds");
 Console.WriteLine(
-    $"First place with 'clear sky','rain' or 'few clouds': {selectCountry.Country} City: {selectCountry.Name}");
+    $"First place with 'clear sky','rain' or 'few clouds': {selectCountry.Country}  City: {selectCountry.Name}");
 
 
 await using (var file = new StreamWriter("Result.txt", true))
 {
-    await file.WriteLineAsync($"Country with max temperature: {maxTemp.Country} {maxTemp.Temp}");
-    await file.WriteLineAsync($"Country with min temperature: {minTemp.Country} {minTemp.Temp}");
-    await file.WriteLineAsync($"Mean temperature: {weathers.Average(i => i.Temp)}");
+    await file.WriteLineAsync($"Country with max temperature: {maxTemp.Country}  {maxTemp.Temp}°C");
+    await file.WriteLineAsync($"Country with min temperature: {minTemp.Country}  {minTemp.Temp}°C");
+    await file.WriteLineAsync($"Mean temperature: {weathers.Average(i => i.Temp)}°C");
     await file.WriteLineAsync(
         $"Number of unique countries: {weathers.Select(i => i.Country).Distinct().ToList().Count}");
     await file.WriteLineAsync(
-        $"First place with 'clear sky','rain' or 'few clouds': {selectCountry.Country} City: {selectCountry.Name}");
+        $"First place with 'clear sky','rain' or 'few clouds': {selectCountry.Country}  City: {selectCountry.Name}");
 }

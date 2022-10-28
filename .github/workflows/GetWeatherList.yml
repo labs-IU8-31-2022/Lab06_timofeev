@@ -18,19 +18,17 @@ jobs:
           cd weather
           dotnet add package Newtonsoft.Json --version 13.0.1
       
-      - name: build
+      - name: Build
         env: 
           API_KEY: ${{ secrets.API_KEY }} 
         run: dotnet build
           
-      - name: run
-        env: 
-          API_KEY: ${{ secrets.API_KEY }} 
+      - name: Run
         run: |
           cd weather/bin/Debug/net6.0
           dotnet weather.dll  
             
-      - name: artifacts
+      - name: Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: Weather.txt
