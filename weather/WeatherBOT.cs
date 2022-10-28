@@ -46,7 +46,7 @@ struct Weather
         throw new Exception("Не знаю что произошло, смотри сам");
     }
 
-    private static (Weather w, int code) FromJsonDeserializer(string json)
+    private static dynamic (Weather w, int code) FromJsonDeserializer(string json)
     {
         var dynamic = JsonConvert.DeserializeObject<dynamic>(json);
 
