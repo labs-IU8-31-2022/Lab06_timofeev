@@ -34,6 +34,7 @@ while (weathers.Count < 5)
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(e.Message);
+        Console.WriteLine(e.Data);
     }
     finally
     {
