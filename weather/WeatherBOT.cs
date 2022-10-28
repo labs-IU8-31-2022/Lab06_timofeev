@@ -5,6 +5,7 @@ namespace WeatherBot;
 
 struct Weather
 {
+    
     public string? Country { get; }
     public string? Name { get; }
     public decimal Temp { get; }
@@ -23,7 +24,7 @@ struct Weather
         HttpClient client = new();
         client.BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/weather");
         var response =
-            await client.GetAsync($"?lat={lat}&lon={lon}&appid={API_KEY}&units=metric");
+            await client.GetAsync($"?lat={lat}&lon={lon}&appid={$ENV{API_KEY}}&units=metric");
         //Console.WriteLine(response.EnsureSuccessStatusCode());
         var (weather, code) = FromJsonDeserializer(await response.Content.ReadAsStringAsync());
         
