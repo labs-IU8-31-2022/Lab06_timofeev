@@ -1,0 +1,1 @@
+﻿[![WeatherGet](https://github.com/labs-IU8-31-2022/Lab06_timofeev/actions/workflows/GetWeatherList.yml/badge.svg)](https://github.com/labs-IU8-31-2022/Lab06_timofeev/actions/workflows/GetWeatherList.yml)
